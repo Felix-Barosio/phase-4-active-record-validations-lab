@@ -3,14 +3,14 @@ class Post < ApplicationRecord
     validates :title, presence: true
     validates :content, length: { minimum: 250 }
     validates :summary, length: { maximum: 250 }
-    validates :category, inclusion: [ "Fiction", "Non-Fiction" ] 
+    validates :category, inclusion:  { in: %w(Fiction Non-Fiction) }
     validate :clickbait?
 
     ALLOWED = [
         /Won't Believe/i,
-        /New/i,
-        /Nice \d/i,
-        /Post /i
+        /Secret/i,
+        /Top \d/i,
+        /Guess /i
     ]
 
 
@@ -19,5 +19,5 @@ class Post < ApplicationRecord
             errors.add(:title, "invalid title")
         end
     end
-    
+
 end
